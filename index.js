@@ -1,9 +1,12 @@
 
+
+
 class IngredientList {
     constructor() {
       this.ingredients = ['Fish', 'Chicken', 'Beef', 'Egg', 'Tomato', 'Vegetables', 'Burger', 'Pizza'];
       this.displayIngredients();
       this.bindAddIngredientButton();
+      this.bindSelectIngredientButton();
     }
   
     addIngredient(name) {
@@ -30,30 +33,32 @@ class IngredientList {
         }
       });
     }
+  
+    bindSelectIngredientButton() {
+      const selectIngredientButton = document.querySelector('#select-ingredient-button');
+      selectIngredientButton.addEventListener('click', () => {
+        const availableIngredientsList = document.querySelector('#available-ingredients');
+        const selectedIngredientsList = document.querySelector('#selected-ingredients');
+        const selectedIngredientName = prompt('Enter the name of the ingredient you want to select:');
+        const selectedIngredient = availableIngredientsList.querySelector(`li:contains("${selectedIngredientName}")`);
+        if (selectedIngredient) {
+          availableIngredientsList.removeChild(selectedIngredient);
+          selectedIngredientsList.appendChild(selectedIngredient);
+          this.displaySelectedIngredients();
+        } else {
+          alert(`Sorry, the ingredient "${selectedIngredientName}" is not available.`);
+        }
+      });
+    }
+    
+    displaySelectedIngredients() {
+      const availableIngredientsList = document.querySelector('#available-ingredients');
+      const selectedIngredientsList = document.querySelector('#selected-ingredients');
+      const selectedIngredients = [...availableIngredientsList.querySelectorAll('li'), ...selectedIngredientsList.querySelectorAll('li')];
+      const selectedIngredientsListContent = selectedIngredients.filter(ingredient => selectedIngredientsList.contains(ingredient)).map(ingredient => `<li>${ingredient.textContent}</li>`).join('');
+      selectedIngredientsList.innerHTML = selectedIngredientsListContent;
+    }
   }
   
   const ingredientList = new IngredientList();
-  
-
-//////////////////////////////////////////////////////
-
-
-class SelectIngredient {
-    constructor(name) {
-      this.name = name;
-    }
-  
-    selectIngredients(ingredientList) {
-      // select some ingredients from the ingredient list
-      const selectedIngredients = ingredientList.ingredients.slice(0, 3);
-  
-      // display the selected ingredients
-      console.log(`Selected ingredients for ${this.name}:`, selectedIngredients);
-    }
-  }
-  
-  // example usage
-  const ingredientsList = new IngredientList();
-  const selectIngredient = new SelectIngredient('John');
-  selectIngredient.selectIngredients(ingredientsList); // should display "Selected ingredients for John: [ 'Fish', 'Chicken', 'Beef' ]"
   
