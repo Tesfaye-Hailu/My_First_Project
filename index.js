@@ -34,3 +34,26 @@ class IngredientList {
   
   const ingredientList = new IngredientList();
   
+
+//////////////////////////////////////////////////////
+
+
+class SelectIngredient {
+    constructor(name) {
+      this.name = name;
+    }
+  
+    selectIngredients(ingredientList) {
+      // select some ingredients from the ingredient list
+      const selectedIngredients = ingredientList.ingredients.slice(0, 3);
+  
+      // display the selected ingredients
+      console.log(`Selected ingredients for ${this.name}:`, selectedIngredients);
+    }
+  }
+  
+  // example usage
+  const ingredientsList = new IngredientList();
+  const selectIngredient = new SelectIngredient('John');
+  selectIngredient.selectIngredients(ingredientsList); // should display "Selected ingredients for John: [ 'Fish', 'Chicken', 'Beef' ]"
+  
