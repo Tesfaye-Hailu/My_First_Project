@@ -1,3 +1,28 @@
 body {
     background-color: lightgray;
 }
+
+#available-ingredients {
+    border-collapse: collapse;
+    margin: 10px;
+    font-size: 18px;
+}
+
+#available-ingredients th,
+#available-ingredients td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#available-ingredients td {
+    width: calc(100% / 4);
+}
+
+tbody {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#add-ingredient-button {
+    margin-top: 10px;
+}
