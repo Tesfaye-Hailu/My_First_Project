@@ -34,22 +34,47 @@ class IngredientList {
       });
     }
   
+    // get the array in data 
+    //     // check arr.includes(selectedingredientName)
+
+    //         // if ture 
+    //             // make new li elemenet in 
+    //             // li = li.innerText = ingredientName 
+    //             //  append li to ul 
+
+    // bindSelectIngredientButton() {
+    //     const selectIngredientButton = document.querySelector('#select-ingredient-button');
+    //     selectIngredientButton.addEventListener('click', () => {
+    //       const availableIngredientsList = document.querySelector('#available-ingredients');
+    //       const selectedIngredientsList = document.querySelector('#selected-ingredients');
+    //       const selectedIngredientName = prompt('Enter the name of the ingredient you want to select:');
+    //       const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent === selectedIngredientName);
+    //       if (selectedIngredient) {
+    //        // availableIngredientsList.removeChild(selectedIngredient);
+    //         selectedIngredientsList.appendChild(selectedIngredient);
+    //         this.displaySelectedIngredients();
+    //       } else {
+    //         alert(`Sorry, the ingredient "${selectedIngredientName}" is not available.`);
+    //       }
+    //     });
+    //   }
+
     bindSelectIngredientButton() {
-      const selectIngredientButton = document.querySelector('#select-ingredient-button');
-      selectIngredientButton.addEventListener('click', () => {
-        const availableIngredientsList = document.querySelector('#available-ingredients');
-        const selectedIngredientsList = document.querySelector('#selected-ingredients');
-        const selectedIngredientName = prompt('Enter the name of the ingredient you want to select:');
-        const selectedIngredient = availableIngredientsList.querySelector(`li:contains("${selectedIngredientName}")`);
-        if (selectedIngredient) {
-          availableIngredientsList.removeChild(selectedIngredient);
-          selectedIngredientsList.appendChild(selectedIngredient);
-          this.displaySelectedIngredients();
-        } else {
-          alert(`Sorry, the ingredient "${selectedIngredientName}" is not available.`);
-        }
-      });
-    }
+        const selectIngredientButton = document.querySelector('#select-ingredient-button');
+        selectIngredientButton.addEventListener('click', () => {
+          const availableIngredientsList = document.querySelector('#available-ingredients');
+          const selectedIngredientsList = document.querySelector('#selected-ingredients');
+          const selectedIngredientName = prompt('Enter the name of the ingredient you want to select:');
+          const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent === selectedIngredientName);
+          if (selectedIngredient) {
+            selectedIngredientsList.appendChild(selectedIngredient.cloneNode(true));
+            this.displaySelectedIngredients();
+          } else {
+            alert(`Sorry, the ingredient "${selectedIngredientName}" is not available.`);
+          }
+        });
+      }
+
     
     displaySelectedIngredients() {
       const availableIngredientsList = document.querySelector('#available-ingredients');
@@ -61,4 +86,4 @@ class IngredientList {
   }
   
   const ingredientList = new IngredientList();
-  
+ /////////////////////
