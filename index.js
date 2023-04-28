@@ -135,32 +135,57 @@ class IngredientList {
     //     });
     //   }
 
+    
+
     bindSelectIngredientButton() {
         const selectIngredientButton = document.querySelector('#select-ingredient-button');
-        const selectedIngredientNames = [];
-      
+        
         selectIngredientButton.addEventListener('click', () => {
           const availableIngredientsList = document.querySelector('#available-ingredients');
           const selectedIngredientsList = document.querySelector('#selected-ingredients');
           let selectedIngredientNamesInput = prompt('Enter the names of the ingredients you want to select (separated by commas):');
           selectedIngredientNamesInput = selectedIngredientNamesInput.split(',').map(name => name.trim().toLowerCase());
           selectedIngredientNamesInput.forEach(name => {
-            if (!selectedIngredientNames.includes(name)) { // Check if name is not already selected
-              const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent.toLowerCase() === name);
-              if (selectedIngredient) {
-                selectedIngredientsList.appendChild(selectedIngredient.cloneNode(true));
-                selectedIngredientNames.push(name); // Add name to selectedIngredientNames array
-              } else {
-                alert(`Sorry, the ingredient "${name}" is not available.`);
-              }
+            const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent.toLowerCase() === name);
+            if (selectedIngredient) {
+              selectedIngredientsList.appendChild(selectedIngredient.cloneNode(true));
             } else {
-              alert(`You have already selected the ingredient "${name}".`);
+              alert(`Sorry, the ingredient "${name}" is not available.`);
             }
           });
           this.displaySelectedIngredients();
         });
       }
+      
+      reset() {
+        const availableIngredientsList = document.querySelector('#available-ingredients');
+        const selectedIngredientsList = document.querySelector('#selected-ingredients');
+        selectedIngredientsList.innerHTML = '';
+    
+        const optionsContainer = document.querySelector('#optionsContainer');
+        optionsContainer.innerHTML = '';
+    
+        const selectIngredientButton = document.querySelector('#select-ingredient-button');
+        selectIngredientButton.disabled = false;
+    
+        this.selectedIngredientNames = []; // Reset selectedIngredientNames to an empty array
+      }
 
+    //   reset() {
+    //     const availableIngredientsList = document.querySelector('#available-ingredients');
+    //     const selectedIngredientsList = document.querySelector('#selected-ingredients');
+    //     selectedIngredientsList.innerHTML = '';
+      
+    //     const optionsContainer = document.querySelector('#optionsContainer');
+    //     optionsContainer.innerHTML = '';
+      
+    //     const selectIngredientButton = document.querySelector('#select-ingredient-button');
+    //     selectIngredientButton.disabled = false;
+      
+    //     this.selectedIngredientNames = []; // Reset selectedIngredientNames to an empty array
+    //   }
+      
+      
 
 // if we have correct ingredients display on page **** Chase****
     //   displayRecipes(selectedIngredientsStrings){
@@ -177,30 +202,55 @@ class IngredientList {
 
 ///*****Chase
 
-  displayRecipes(selectedIngredientsStrings) {
+//   displayRecipes(selectedIngredientsStrings) {
+//     let optionsContainer = document.getElementById('optionsContainer');
+//     optionsContainer.innerHTML = '';
+  
+//     dishes.forEach((dish)=>{
+//       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
+//       if (hasAllIngredients) {
+//         let optionDiv = document.createElement('div');
+//         optionDiv.classList.add('option');
+  
+//         let nameP = document.createElement('p');
+//         nameP.innerText = dish.name;
+//         optionDiv.appendChild(nameP);
+  
+//         let ingredientsP = document.createElement('p');
+//         ingredientsP.innerText = dish.ingredients.join(', ');
+//         optionDiv.appendChild(ingredientsP);
+  
+//         optionsContainer.appendChild(optionDiv);
+//       }
+//     })
+//   }
+///////
+displayRecipes(selectedIngredientsStrings) {
     let optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
-  
+
+    let selectedIngredientsMessage = document.createElement('p');
+    selectedIngredientsMessage.innerText = "You may order any of the below:";
+    optionsContainer.appendChild(selectedIngredientsMessage);
+
     dishes.forEach((dish)=>{
       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
       if (hasAllIngredients) {
         let optionDiv = document.createElement('div');
         optionDiv.classList.add('option');
-  
+
         let nameP = document.createElement('p');
         nameP.innerText = dish.name;
         optionDiv.appendChild(nameP);
-  
+
         let ingredientsP = document.createElement('p');
         ingredientsP.innerText = dish.ingredients.join(', ');
         optionDiv.appendChild(ingredientsP);
-  
+
         optionsContainer.appendChild(optionDiv);
       }
-    })
+    });
   }
-///////
-
 
 
 
