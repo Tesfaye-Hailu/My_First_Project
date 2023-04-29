@@ -225,34 +225,64 @@ class IngredientList {
 //     })
 //   }
 ///////
+// displayRecipes(selectedIngredientsStrings) {
+//     let optionsContainer = document.getElementById('optionsContainer');
+//     optionsContainer.innerHTML = '';
+
+//     let selectedIngredientsMessage = document.createElement('p');
+//     selectedIngredientsMessage.innerText = "You may order any of the below:";
+//     optionsContainer.appendChild(selectedIngredientsMessage);
+
+//     dishes.forEach((dish)=>{
+//       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
+//       if (hasAllIngredients) {
+//         let optionDiv = document.createElement('div');
+//         optionDiv.classList.add('option');
+
+//         let nameP = document.createElement('p');
+//         nameP.innerText = dish.name;
+//         optionDiv.appendChild(nameP);
+
+//         let ingredientsP = document.createElement('p');
+//         ingredientsP.innerText = dish.ingredients.join(', ');
+//         optionDiv.appendChild(ingredientsP);
+
+//         optionsContainer.appendChild(optionDiv);
+//       }
+//     });
+//   }
+
 displayRecipes(selectedIngredientsStrings) {
     let optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
-
-    let selectedIngredientsMessage = document.createElement('p');
-    selectedIngredientsMessage.innerText = "You may order any of the below:";
-    optionsContainer.appendChild(selectedIngredientsMessage);
-
-    dishes.forEach((dish)=>{
+  
+    let optionsExist = false;
+    dishes.forEach((dish) => {
       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
       if (hasAllIngredients) {
         let optionDiv = document.createElement('div');
         optionDiv.classList.add('option');
-
+  
         let nameP = document.createElement('p');
         nameP.innerText = dish.name;
         optionDiv.appendChild(nameP);
-
+  
         let ingredientsP = document.createElement('p');
         ingredientsP.innerText = dish.ingredients.join(', ');
         optionDiv.appendChild(ingredientsP);
-
+  
         optionsContainer.appendChild(optionDiv);
+  
+        optionsExist = true;
       }
     });
+  
+    if (optionsExist) {
+      let message = document.createElement('p');
+      message.innerText = 'You may order any of the below:';
+      optionsContainer.insertBefore(message, optionsContainer.firstChild);
+    }
   }
-
-
 
 //////
 
