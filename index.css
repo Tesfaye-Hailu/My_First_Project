@@ -24,7 +24,7 @@ body {
 
   
 .upper-section  {
-    background-color:lightgrey;
+    background-color:antiquewhite;
     
     display: flex;
     flex-direction: column;
@@ -51,21 +51,57 @@ button {
     margin-top: 5px;
     margin-bottom: 3px;
     font-weight: bolder;
-    background-color:lightskyblue;
+    background-color:green;
+    color: white;
+    font-size: medium;
     
   }
 
   .welcome-message {
-    background-color: #008000;
-    color: #fff;
+   
+    color:blue;
     text-align: center;
     font-size: 24px;
     font-weight: bold;}
 
-.second image {
-    display: grid;
-    grid-template-columns: repeat(3,33%);
-    background-image: url('Images/Meals.jpg');
+
+
+#available-ingredients, #selected-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
- 
+#available-ingredients li, #selected-ingredients li {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+#available-ingredients li::before, #selected-ingredients li::before {
+  content: '•';
+  margin-right: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#selected-ingredients ul {
+  list-style-type: disc;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+#selected-ingredients li {
+  display: inline-block;
+  margin-right: 10px;
+}

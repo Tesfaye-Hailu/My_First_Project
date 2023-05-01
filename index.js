@@ -1,25 +1,39 @@
 
+// Arrays of Dish Object
 let dishes = [
     {
-        name: 'chicken soup',
-        ingredients:['chicken', 'egg']
+        name: 'Chicken Soup',
+        ingredients:['Chicken', 'Egg']
+    },
+    { name: 'Spaghetti',
+    ingredients:['Pasta', 'Cheese', 'Egg']
+
+    },
+    { name: 'Cheese Burger',
+    ingredients:['Cheese', 'Bread', 'Egg']
+
     },
     {
-        name: 'chicken sandwich',
-        ingredients:['chicken']
+        name: 'Chicken Sandwich',
+        ingredients:['Chicken']
     },
     {
-        name: 'chicken salad',
-        ingredients:['chicken', "salad"]
+        name: 'Chicken Salad',
+        ingredients:['Chicken', "Salad"]
     },
     {
-        name: 'fish salad',
-        ingredients:['fish', 'salad', 'tomatos']
-    }
+        name: 'Fish Salad',
+        ingredients:['Fish', 'Salad', 'Tomatos']
+    },
+    { name: 'Macchiato OR Latte',
+    ingredients:['Milk', 'Coffee']
+  },
+    
 ]
+
 class IngredientList {
     constructor() {
-      this.ingredients = ['Fish', 'Chicken', 'Beef', 'Egg', 'Tomatos', 'Vegetables', 'Burger', 'Pizza', 'Coffee','Salad','Sandwich'];
+      this.ingredients = ['Fish', 'Chicken', 'Beef', 'Egg', 'Cheese', 'Tomatos','pasta', 'Vegetables', 'Bread', 'Pizza', 'Coffee','Salad','Milk'];
       this.displayIngredients();
       this.bindAddIngredientButton();
       this.bindSelectIngredientButton();
@@ -30,79 +44,44 @@ class IngredientList {
       this.displayIngredients();
     }
   
+    // to display ingredients horizontally
     displayIngredients() {
       const availableIngredientsList = document.querySelector('#available-ingredients');
       availableIngredientsList.innerHTML = '';
+    
+      const ul = document.createElement('ul');
+      
+      
       for (const ingredient of this.ingredients) {
         const li = document.createElement('li');
+        li.style.display = 'inline-block';
+        li.style.marginRight = '10px';
         li.textContent = ingredient;
-        availableIngredientsList.appendChild(li);
+        ul.appendChild(li);
       }
+    
+      availableIngredientsList.appendChild(ul);
     }
-  
-    // bindAddIngredientButton() {
-    //   const addIngredientButton = document.querySelector('#add-ingredient-button');
-    //   addIngredientButton.addEventListener('click', () => {
-    //     const newIngredientName = prompt('Enter a new ingredient:');
-    //     if (newIngredientName) {
-    //       this.addIngredient(newIngredientName);
-    //     }
-    //   });
-    // }
-  
-    // bindAddIngredientButton() {
-    //     const addIngredientButton = document.querySelector('#add-ingredient-button');
-    //     addIngredientButton.addEventListener('click', () => {
-    //       const newIngredientNames = prompt('Enter one or more new ingredients separated by commas:');
-    //       if (newIngredientNames) {
-    //         const ingredientNames = newIngredientNames.split(',').map(name => name.trim());
-    //         ingredientNames.forEach(name => this.addIngredient(name));
-    //       }
-    //     });
-    //   }
-
-    // bindAddIngredientButton() {
-    //     const addIngredientButton = document.querySelector('#add-ingredient-button');
-    //     addIngredientButton.addEventListener('click', () => {
-    //       const newIngredientNames = prompt('Enter one or more new ingredients separated by commas:');
-    //       if (newIngredientNames) {
-    //         const ingredientNames = newIngredientNames.split(',').map(name => name.trim());
-    //         ingredientNames.forEach(name => {
-    //           if (!this.checkDuplicateIngredient(name)) {
-    //             this.addIngredient(name);
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
-      
-    //   checkDuplicateIngredient(name) {
-    //     const availableIngredientsList = document.querySelector('#available-ingredients');
-    //     const ingredientListItems = availableIngredientsList.querySelectorAll('li');
-    //     for (let i = 0; i < ingredientListItems.length; i++) {
-    //       if (ingredientListItems[i].textContent.toLowerCase() === name.toLowerCase()) {
-    //         return true;
-    //       }
-    //     }
-    //     return false;
-    //   }
-      
+    
+     // to add additional ingredients in the website.
     bindAddIngredientButton() {
-        const addIngredientButton = document.querySelector('#add-ingredient-button');
-        addIngredientButton.addEventListener('click', () => {
-          const newIngredientNames = prompt('Enter one or more new ingredients separated by commas:');
-          if (newIngredientNames) {
-            const ingredientNames = newIngredientNames.split(',').map(name => name.trim());
-            ingredientNames.forEach(name => {
-              if (!this.checkDuplicateIngredient(name)) {
-                const capitalizedIngredientName = name.charAt(0).toUpperCase() + name.slice(1);
-                this.addIngredient(capitalizedIngredientName);
-              }
-            });
-          }
-        });
-      }
-      
+      const addIngredientButton = document.querySelector('#add-ingredient-button');
+      addIngredientButton.addEventListener('click', () => {
+        const newIngredientNames = prompt('Enter one or more new ingredients separated by commas:');
+        if (newIngredientNames) {
+          const ingredientNames = newIngredientNames.split(',').map(name => name.trim());
+          ingredientNames.forEach(name => {
+            if (!this.checkDuplicateIngredient(name)) {
+              const capitalizedIngredientName = name.charAt(0).toUpperCase() + name.slice(1);
+              this.addIngredient(capitalizedIngredientName);
+            } else {
+              alert(`"${name}" is already in the list of ingredients!`);
+            }
+          });
+        }
+      });
+    }
+      // to check duplicated ingredients
       checkDuplicateIngredient(name) {
         const availableIngredientsList = document.querySelector('#available-ingredients');
         const ingredientListItems = availableIngredientsList.querySelectorAll('li');
@@ -114,49 +93,47 @@ class IngredientList {
         return false;
       }
 
-              
-    // bindSelectIngredientButton() {
-    //     const selectIngredientButton = document.querySelector('#select-ingredient-button');
-    //     selectIngredientButton.addEventListener('click', () => {
-    //       const availableIngredientsList = document.querySelector('#available-ingredients');
-    //       const selectedIngredientsList = document.querySelector('#selected-ingredients');
-    //       let selectedIngredientNames = prompt('Enter the names of the ingredients you want to select (separated by commas):');
-    //       selectedIngredientNames = selectedIngredientNames.split(',').map(name => name.trim().toLowerCase()); // split input by commas and trim whitespace
-    //       selectedIngredientNames = [...new Set(selectedIngredientNames)]; // remove duplicates
-    //       selectedIngredientNames.forEach(name => {
-    //         const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent.toLowerCase() === name);
-    //         if (selectedIngredient) {
-    //           selectedIngredientsList.appendChild(selectedIngredient.cloneNode(true));
-    //         } else {
-    //           alert(`Sorry, the ingredient "${name}" is not available.`);
-    //         }
-    //       });
-    //       this.displaySelectedIngredients();
-    //     });
-    //   }
-
+      // a method to select ingredients from the available list
     
-
     bindSelectIngredientButton() {
-        const selectIngredientButton = document.querySelector('#select-ingredient-button');
-        
-        selectIngredientButton.addEventListener('click', () => {
-          const availableIngredientsList = document.querySelector('#available-ingredients');
-          const selectedIngredientsList = document.querySelector('#selected-ingredients');
-          let selectedIngredientNamesInput = prompt('Enter the names of the ingredients you want to select (separated by commas):');
-          selectedIngredientNamesInput = selectedIngredientNamesInput.split(',').map(name => name.trim().toLowerCase());
-          selectedIngredientNamesInput.forEach(name => {
-            const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent.toLowerCase() === name);
-            if (selectedIngredient) {
+      const selectIngredientButton = document.querySelector('#select-ingredient-button');
+    
+      selectIngredientButton.addEventListener('click', () => {
+        const availableIngredientsList = document.querySelector('#available-ingredients');
+        const selectedIngredientsList = document.querySelector('#selected-ingredients');
+        let selectedIngredientNamesInput = prompt('Enter the names of the ingredients you want to select (separated by commas):');
+        selectedIngredientNamesInput = selectedIngredientNamesInput.split(',').map(name => name.trim().toLowerCase());
+    
+        selectedIngredientNamesInput.forEach(name => {
+          const selectedIngredient = [...availableIngredientsList.querySelectorAll('li')].find(li => li.textContent.toLowerCase() === name);
+          if (selectedIngredient) {
+            if (!this.checkDuplicateIngredientInSelected(selectedIngredient.textContent)) {
               selectedIngredientsList.appendChild(selectedIngredient.cloneNode(true));
             } else {
-              alert(`Sorry, the ingredient "${name}" is not available.`);
+              alert(`The ingredient "${selectedIngredient.textContent}" is already selected.`);
             }
-          });
-          this.displaySelectedIngredients();
+          } else {
+            alert(`Sorry, the ingredient "${name}" is not available.`);
+          }
         });
+    
+        this.displaySelectedIngredients();
+      });
+    }
+    
+    checkDuplicateIngredientInSelected(name) {
+      const selectedIngredientsList = document.querySelector('#selected-ingredients');
+      const selectedIngredientListItems = selectedIngredientsList.querySelectorAll('li');
+      for (let i = 0; i < selectedIngredientListItems.length; i++) {
+        if (selectedIngredientListItems[i].textContent.toLowerCase() === name.toLowerCase()) {
+          return true;
+        }
       }
+      return false;
+    }
+    
       
+      // to reset or clear selected items for the next user.
       reset() {
         const availableIngredientsList = document.querySelector('#available-ingredients');
         const selectedIngredientsList = document.querySelector('#selected-ingredients');
@@ -171,121 +148,36 @@ class IngredientList {
         this.selectedIngredientNames = []; // Reset selectedIngredientNames to an empty array
       }
 
-    //   reset() {
-    //     const availableIngredientsList = document.querySelector('#available-ingredients');
-    //     const selectedIngredientsList = document.querySelector('#selected-ingredients');
-    //     selectedIngredientsList.innerHTML = '';
-      
-    //     const optionsContainer = document.querySelector('#optionsContainer');
-    //     optionsContainer.innerHTML = '';
-      
-    //     const selectIngredientButton = document.querySelector('#select-ingredient-button');
-    //     selectIngredientButton.disabled = false;
-      
-    //     this.selectedIngredientNames = []; // Reset selectedIngredientNames to an empty array
-    //   }
-      
-      
-
-// if we have correct ingredients display on page **** Chase****
-    //   displayRecipes(selectedIngredientsStrings){
-    //       dishes.forEach((dish)=>{
-    //           let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
-    //           console.log(dish.ingredients, selectedIngredientsStrings, hasAllIngredients);
-    //           if (hasAllIngredients) {
-    //             console.log(dish.name)
-                
-    //         }
-
-    //     })
-    //   }
-
-///*****Chase
-
-//   displayRecipes(selectedIngredientsStrings) {
-//     let optionsContainer = document.getElementById('optionsContainer');
-//     optionsContainer.innerHTML = '';
-  
-//     dishes.forEach((dish)=>{
-//       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
-//       if (hasAllIngredients) {
-//         let optionDiv = document.createElement('div');
-//         optionDiv.classList.add('option');
-  
-//         let nameP = document.createElement('p');
-//         nameP.innerText = dish.name;
-//         optionDiv.appendChild(nameP);
-  
-//         let ingredientsP = document.createElement('p');
-//         ingredientsP.innerText = dish.ingredients.join(', ');
-//         optionDiv.appendChild(ingredientsP);
-  
-//         optionsContainer.appendChild(optionDiv);
-//       }
-//     })
-//   }
-///////
-// displayRecipes(selectedIngredientsStrings) {
-//     let optionsContainer = document.getElementById('optionsContainer');
-//     optionsContainer.innerHTML = '';
-
-//     let selectedIngredientsMessage = document.createElement('p');
-//     selectedIngredientsMessage.innerText = "You may order any of the below:";
-//     optionsContainer.appendChild(selectedIngredientsMessage);
-
-//     dishes.forEach((dish)=>{
-//       let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
-//       if (hasAllIngredients) {
-//         let optionDiv = document.createElement('div');
-//         optionDiv.classList.add('option');
-
-//         let nameP = document.createElement('p');
-//         nameP.innerText = dish.name;
-//         optionDiv.appendChild(nameP);
-
-//         let ingredientsP = document.createElement('p');
-//         ingredientsP.innerText = dish.ingredients.join(', ');
-//         optionDiv.appendChild(ingredientsP);
-
-//         optionsContainer.appendChild(optionDiv);
-//       }
-//     });
-//   }
-
+// to give an options to the user if the selected combination produces some product
+    
 displayRecipes(selectedIngredientsStrings) {
-    let optionsContainer = document.getElementById('optionsContainer');
-    optionsContainer.innerHTML = '';
-  
-    let optionsExist = false;
-    dishes.forEach((dish) => {
-      let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
-      if (hasAllIngredients) {
-        let optionDiv = document.createElement('div');
-        optionDiv.classList.add('option');
-  
-        let nameP = document.createElement('p');
-        nameP.innerText = dish.name;
-        optionDiv.appendChild(nameP);
-  
-        let ingredientsP = document.createElement('p');
-        ingredientsP.innerText = dish.ingredients.join(', ');
-        optionDiv.appendChild(ingredientsP);
-  
-        optionsContainer.appendChild(optionDiv);
-  
-        optionsExist = true;
-      }
-    });
-  
-    if (optionsExist) {
-      let message = document.createElement('p');
-      message.innerText = 'You may order any of the below:';
-      optionsContainer.insertBefore(message, optionsContainer.firstChild);
+  let optionsContainer = document.getElementById('optionsContainer');
+  optionsContainer.innerHTML = '';
+
+  let optionsExist = false;
+  dishes.forEach((dish) => {
+    let hasAllIngredients = dish.ingredients.every(v => selectedIngredientsStrings.includes(v.toLowerCase()));
+    if (hasAllIngredients) {
+      let optionDiv = document.createElement('div');
+      optionDiv.classList.add('option');
+
+      let nameP = document.createElement('p');
+      nameP.innerText = dish.name;
+      optionDiv.appendChild(nameP);
+
+      optionsContainer.appendChild(optionDiv);
+
+      optionsExist = true;
     }
+  });
+
+  if (optionsExist) {
+    let message = document.createElement('p');
+    message.innerText = 'You may order any of the below:';
+    optionsContainer.insertBefore(message, optionsContainer.firstChild);
   }
-
-//////
-
+}
+   // to display matching ingredients
     displaySelectedIngredients() {
       const availableIngredientsList = document.querySelector('#available-ingredients');
       const selectedIngredientsList = document.querySelector('#selected-ingredients');
@@ -297,13 +189,12 @@ displayRecipes(selectedIngredientsStrings) {
       this.displayRecipes(selectedIngredientsStrings);
       const selectedIngredientsListContent = selectedIngredients.filter(ingredient => selectedIngredientsList.contains(ingredient)).map(ingredient => `<li>${ingredient.textContent}</li>`).join('');
       selectedIngredientsList.innerHTML = selectedIngredientsListContent;
-     // console.log (selectedIngredientsListContent)
+      console.log (selectedIngredientsListContent)
     }
   }
   
   const ingredientList = new IngredientList();
   
-
 
 // Get a reference to the reset button element
 const resetBtn = document.getElementById('reset-button');
