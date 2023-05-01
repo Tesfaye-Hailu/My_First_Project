@@ -1,27 +1,26 @@
                                # My_First_Project
+                               
+The name of the project is Receipe Manager.     
 
-The aim of this project is to display available ingredients . 
-It will give options to add new ingredients.
-Then, the user can select any ingredients of his/her choice. 
+Motivation to do this project is that it is easy to adapt and use the project to any small business organizations.
+
+Here below are the features of the project:
+The aim of this project is to display available ingredients to the user.
+It will give options to add new ingredients by the receipe owner.
+Then, the user can select any ingredients of his/her choice from the available list. 
+If the list is not available, there is a prompt that says the selected ingredients is/are not in the list.
 It will display both available and selected ingredients. 
-finally, it will re-set the selected items for next user.
+There are dishes, which are being produced by combining some ingredients. Hence, the system will give options to the user to order the dishes(if he/she is interested).
+Finally, it will re-set the selected items for next user.
 
-This is a JavaScript class called IngredientList that manages a list of ingredients.
-It has a constructor that sets up the initial list of ingredients and calls the displayIngredients() method to display them in an unordered list on the web page.
+The system will check duplications of ingredients both on adding additional ingredients and selecting ingredients before clicking the re-set button. This will serve as a control mechanism from the user and receipe owner side.
 
-The class has three methods:
+The system is not case sensitive. It will check only spelling check.
 
-A)addIngredient(name): This method adds a new ingredient to the list and calls the displayIngredients() method to update the displayed list.
+This project is good because, it will be  easy to adapt for any small business. It is very easy to use by the user or the receipe owner.
 
-B) displayIngredients(): This method updates the displayed list of available ingredients. 
+The provided code defines a class called IngredientList that manages a list of ingredients and allows the user to select ingredients from the list. It also provides a method called displayRecipes that displays recipe options based on the selected ingredients. The recipes are defined in an array of dish objects with names and lists of ingredients. The code uses event listeners and DOM manipulation to enable user interaction and display the results.
 
-C)bindSelectIngredientButton(): This method adds an event listener to the "Select Ingredient" button on the web page. When the button is clicked, it prompts the user to enter the name of an ingredient they want to select. If the ingredient is available in the list of available ingredients, it adds a new list item for that ingredient to the "Selected Ingredients" list on the web page using the appendChild() method. It then calls the displaySelectedIngredients() method to update the displayed list of selected ingredients.
+I have tested it and it is functioning the intended task.
 
-The class also has a method called displaySelectedIngredients() that updates the displayed list of selected ingredients. 
-
-Finally, there is a reference to a "Reset" button on the web page, and an event listener is added to this button that clears the "Selected Ingredients" list when clicked.
-
-
-
-
-
+I would like to thank my instructor , Mr Chase , for his close support and guidances in all the process of this project.
